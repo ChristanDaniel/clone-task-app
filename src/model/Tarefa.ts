@@ -29,6 +29,10 @@ export default class Tarefa {
         return this.#concluida
     }
 
+    get ativa() {
+        return !this.concluida
+    }
+
     alternarStatus() {
         return this.#concluida ? this.ativar() : this.concluir()
     }

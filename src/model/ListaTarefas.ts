@@ -33,4 +33,22 @@ export default class ListasTarefas {
     exibindoSomenteConcluidas(): boolean {
         return this.#filtroUtilizado === TipoFiltro.CONCLUIDAS
     }
+
+    private aplicarFiltroEm(tarefas: Tarefa[]): Tarefa[] {
+        if(this.exibindoSomenteAtivas()) {
+            return this.aplicarFiltroAtivas(tarefas)
+        } else if (this.exibindoSomenteConcluidas()) {
+            return this.aplicarFiltroConcluidas(tarefas)
+        } else {
+            return [...tarefas]
+        }
+    }
+
+    private aplicarFiltroAtivas(tarefas: Tarefa[]): Tarefa[] {
+        return tarefas.filter(tarefa => tarefa.ativa)
+    }
+
+    private aplicarFiltroConcluidas(tarefas: Tarefa[]): Tarefa[] {
+        return tarefas.filter(tarefa => tarefa.concluida)
+    }
 }
