@@ -11,7 +11,7 @@ export default class ListasTarefas {
     }
 
     get itens() {
-        return this.#todas
+        return this.aplicarFiltroEm(this.#todas)
     }
 
     get quantidade() {
