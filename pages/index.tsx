@@ -1,9 +1,24 @@
 import type { NextPage } from 'next'
+import tarefasIniciais from '../src/data/mock'
+import Tarefa from '../src/model/Tarefa'
 
 
 const Home: NextPage = () => {
+
+  let tarefas = tarefasIniciais
+
   return (
-    <h1>Hello World</h1>
+    <>
+      {tarefas.itens.map((taref) => {
+        return (
+          <div key={taref.id}>
+            <span>{taref.id}</span>
+            <span>{taref.descricao}</span>
+            <span>{taref.concluida ? 'Concluída' : 'Ativa'}</span>
+          </div>
+        )
+      })}
+    </>
   )
 }
 
