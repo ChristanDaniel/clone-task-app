@@ -22,6 +22,30 @@ export default class ListasTarefas {
         return this.#filtroUtilizado
     }
 
+    filtrarAtivas() {
+        if(!this.exibindoSomenteAtivas()) {
+            return new ListasTarefas(this.#todas, TipoFiltro.ATIVAS)
+        } else {
+            return this
+        }
+    }
+
+    filtrarConcluidas() {
+        if(!this.exibindoSomenteConcluidas()) {
+            return new ListasTarefas(this.#todas, TipoFiltro.CONCLUIDAS)
+        } else {
+            return this
+        }
+    }
+
+    removerFilto() {
+        if(!this.exibindoTodas()) {
+            return new ListasTarefas(this.#todas, TipoFiltro.NENHUM)
+        } else {
+            return this
+        }
+    }
+
     exibindoTodas(): boolean {
         return this.#filtroUtilizado === TipoFiltro.NENHUM
     }
