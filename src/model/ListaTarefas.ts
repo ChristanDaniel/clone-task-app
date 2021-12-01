@@ -22,12 +22,30 @@ export default class ListasTarefas {
         return this.#filtroUtilizado
     }
 
+    adicionarTarefa(novaTarefa: Tarefa): ListasTarefas {
+        const todas = [ ...this.#todas] 
+        todas.push(novaTarefa)
+        return new ListasTarefas(todas, this.filtroUtilizado)
+    }
+
+    modificarTarefa(tarefaModificada: Tarefa): ListasTarefas {
+        const todas = this.#todas.map(tarefa => {
+            return tarefa.id === tarefaModificada.id ? tarefaModificada : tarefa
+        })
+        return new ListasTarefas(todas, this.filtroUtilizado)
+    }
+
     filtrarAtivas() {
         if(!this.exibindoSomenteAtivas()) {
             return new ListasTarefas(this.#todas, TipoFiltro.ATIVAS)
         } else {
             return this
         }
+    }
+
+    excluirConcluidas() {
+        const somenteAtivas = this.#todas.filter(tarefa => tarefa.ativa)
+        return new ListasTarefas(somenteAtivas, TipoFiltro.NENHUM)
     }
 
     filtrarConcluidas() {
